@@ -1,3 +1,15 @@
 frontend_homepage:
     path:     /
-    defaults: { _controller: FrontendBundle:Inici:inici }
+    defaults: { _controller: FrontendBundle:Inicio:inicio }
+
+frontend_quienessomos:
+    path:     /quienessomos
+    defaults: { _controller: FrontendBundle:Default:quienessomos }
+
+frontend_contacto:
+    path:     /contacto
+    defaults: { _controller: FrontendBundle:Contacto:contacto }
+
+frontend_login:
+    path:     /login
+    defaults: { _controller: FrontendBundle:Login:login }
