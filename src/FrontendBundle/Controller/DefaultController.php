@@ -10,4 +10,9 @@ class DefaultController extends Controller
     {
         return $this->render('FrontendBundle:Default:index.html.twig');
     }
+
+    public function quienessomosAction()
+    {
+        return $this->render('FrontendBundle:Default:quienessomos.html.twig');
+    }
 }

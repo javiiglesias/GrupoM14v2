@@ -1,0 +1,30 @@
+{% extends "FrontendBundle:Default:base.html.twig" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="container">
+                <div class="col-xs-8 col-sm-8  col-md-4 col-xs-offset-3 col-sm-offset-4 col-md-offset-5">
+                    <img src="#" class="img-responsive img-Logologin">
+                </div>
+                <div class="col-xs-11 col-md-4 col-xs-offset-1 col-md-offset-4 ">                    
+                    <div class="container-login">                        
+                        <form action="" method="POST">                             
+                            <h1 class="text-center">Iniciar Sesión</h1>
+                            <div class="form-group">
+                                <label>Usuario:</label>
+                                <input type="text" name="usuari" value="" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Contraseña:</label>
+                                <input type="password" name="pass" class="form-control">
+                            </div>
+                            <p>Recordar usuario <input type="checkbox" name="recordarUsuari"><p>
+                            <p><a href="">Registrarse como usuario</a></p>
+                            <div class="col-xs-10 col-md-9 col-md-offset-3 col-xs-offset-2">
+                                <button name="Submit" class="btn btn-info"> Entrar <image class="btn-icon" src="#"/> </button>
+                            </div>
+                        <form>
+                    </div>                    
+                </div>
+</div>
+{% endblock %}
+
