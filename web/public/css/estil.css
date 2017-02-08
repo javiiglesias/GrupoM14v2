@@ -67,8 +67,7 @@ and open the template in the editor.
 }
 
 .navbar-inverse {
-    background-color: #000 !important;
-    opacity: 0.8;
+    background-color: transparent !important;
     border-color: #ccc;
 }
 
@@ -84,7 +83,7 @@ and open the template in the editor.
     color:#337ab7 !important;
     border-bottom:5px solid #337ab7;
     text-shadow:1px 1px 1px #000;
-    background-color:rgba(69, 68, 68, 1) !important;
+    background-color:rgba(69, 68, 68, 0.7) !important;
 }
 
 .navbar-form {
