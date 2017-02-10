@@ -1,3 +1,19 @@
 backend_homepage:
     path:     /
     defaults: { _controller: BackendBundle:Default:index }
+
+backend_actores:
+    path:     /actores
+    defaults: { _controller: BackendBundle:Actores:actores }
+
+backend_directores:
+    path:     /directores
+    defaults: { _controller: BackendBundle:Directores:directores }
+
+backend_obras:
+    path:     /obras
+    defaults: { _controller: BackendBundle:Obras:obras }
+
+backend_proyectos:
+    path:     /proyectos
+    defaults: { _controller: BackendBundle:Proyectos:proyectos }
