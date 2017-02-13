@@ -8,94 +8,92 @@ use Doctrine\ORM\Mapping as ORM;
  * Actor
  *
  * @ORM\Table(name="actor")
- * @ORM\Entity(repositoryClass="FrontendBundle\Repository\ActorRepository")
+ * @ORM\Entity
  */
 class Actor
 {
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="NIF", type="string", length=255, nullable=false)
      */
-    private $id;
+    private $nif;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="NIF", type="string", length=255)
-     */
-    private $nIF;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Nom", type="string", length=255)
+     * @ORM\Column(name="Nom", type="string", length=255, nullable=false)
      */
     private $nom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Cognom1", type="string", length=255)
+     * @ORM\Column(name="Cognom1", type="string", length=255, nullable=false)
      */
     private $cognom1;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Cognom2", type="string", length=255)
+     * @ORM\Column(name="Cognom2", type="string", length=255, nullable=false)
      */
     private $cognom2;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Sexe", type="string", length=255)
+     * @ORM\Column(name="Sexe", type="string", length=255, nullable=false)
      */
     private $sexe;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Foto", type="string", length=255)
+     * @ORM\Column(name="Foto", type="string", length=255, nullable=false)
      */
     private $foto;
 
-
     /**
-     * Get id
+     * @var integer
      *
-     * @return int
+     * @ORM\Column(name="id_obra", type="integer", nullable=false)
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    private $idObra;
 
     /**
-     * Set nIF
+     * @var integer
      *
-     * @param string $nIF
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+
+    /**
+     * Set nif
+     *
+     * @param string $nif
      *
      * @return Actor
      */
-    public function setNIF($nIF)
+    public function setNif($nif)
     {
-        $this->nIF = $nIF;
+        $this->nif = $nif;
 
         return $this;
     }
 
     /**
-     * Get nIF
+     * Get nif
      *
      * @return string
      */
-    public function getNIF()
+    public function getNif()
     {
-        return $this->nIF;
+        return $this->nif;
     }
 
     /**
@@ -217,5 +215,38 @@ class Actor
     {
         return $this->foto;
     }
-}
 
+    /**
+     * Set idObra
+     *
+     * @param integer $idObra
+     *
+     * @return Actor
+     */
+    public function setIdObra($idObra)
+    {
+        $this->idObra = $idObra;
+
+        return $this;
+    }
+
+    /**
+     * Get idObra
+     *
+     * @return integer
+     */
+    public function getIdObra()
+    {
+        return $this->idObra;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}

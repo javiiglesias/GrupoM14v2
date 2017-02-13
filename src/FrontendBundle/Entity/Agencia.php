@@ -8,66 +8,57 @@ use Doctrine\ORM\Mapping as ORM;
  * Agencia
  *
  * @ORM\Table(name="agencia")
- * @ORM\Entity(repositoryClass="FrontendBundle\Repository\AgenciaRepository")
+ * @ORM\Entity
  */
 class Agencia
 {
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="CIF", type="string", length=255, nullable=false)
      */
-    private $id;
+    private $cif;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="CIF", type="string", length=255)
-     */
-    private $cIF;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Nom", type="string", length=255)
+     * @ORM\Column(name="Nom", type="string", length=255, nullable=false)
      */
     private $nom;
 
-
     /**
-     * Get id
+     * @var integer
      *
-     * @return int
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    private $id;
+
+
 
     /**
-     * Set cIF
+     * Set cif
      *
-     * @param string $cIF
+     * @param string $cif
      *
      * @return Agencia
      */
-    public function setCIF($cIF)
+    public function setCif($cif)
     {
-        $this->cIF = $cIF;
+        $this->cif = $cif;
 
         return $this;
     }
 
     /**
-     * Get cIF
+     * Get cif
      *
      * @return string
      */
-    public function getCIF()
+    public function getCif()
     {
-        return $this->cIF;
+        return $this->cif;
     }
 
     /**
@@ -93,5 +84,14 @@ class Agencia
     {
         return $this->nom;
     }
-}
 
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}

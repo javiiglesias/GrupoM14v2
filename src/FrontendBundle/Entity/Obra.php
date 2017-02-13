@@ -8,88 +8,55 @@ use Doctrine\ORM\Mapping as ORM;
  * Obra
  *
  * @ORM\Table(name="obra")
- * @ORM\Entity(repositoryClass="FrontendBundle\Repository\ObraRepository")
+ * @ORM\Entity
  */
 class Obra
 {
     /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="Codi", type="integer", unique=true)
-     */
-    private $codi;
-
-    /**
      * @var string
      *
-     * @ORM\Column(name="Nom", type="string", length=255)
+     * @ORM\Column(name="Nom", type="string", length=255, nullable=false)
      */
     private $nom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Descripcio", type="string", length=255)
+     * @ORM\Column(name="Descripcio", type="string", length=255, nullable=false)
      */
     private $descripcio;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="DataInici", type="date")
+     * @ORM\Column(name="DataInici", type="date", nullable=false)
      */
-    private $dataInici;
+    private $datainici;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="DataFi", type="date")
+     * @ORM\Column(name="DataFi", type="date", nullable=false)
      */
-    private $dataFi;
-
+    private $datafi;
 
     /**
-     * Get id
+     * @var integer
      *
-     * @return int
+     * @ORM\Column(name="id_agencia", type="integer", nullable=false)
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    private $idAgencia;
 
     /**
-     * Set codi
+     * @var integer
      *
-     * @param integer $codi
-     *
-     * @return Obra
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    public function setCodi($codi)
-    {
-        $this->codi = $codi;
+    private $id;
 
-        return $this;
-    }
 
-    /**
-     * Get codi
-     *
-     * @return int
-     */
-    public function getCodi()
-    {
-        return $this->codi;
-    }
 
     /**
      * Set nom
@@ -140,51 +107,84 @@ class Obra
     }
 
     /**
-     * Set dataInici
+     * Set datainici
      *
-     * @param \DateTime $dataInici
+     * @param \DateTime $datainici
      *
      * @return Obra
      */
-    public function setDataInici($dataInici)
+    public function setDatainici($datainici)
     {
-        $this->dataInici = $dataInici;
+        $this->datainici = $datainici;
 
         return $this;
     }
 
     /**
-     * Get dataInici
+     * Get datainici
      *
      * @return \DateTime
      */
-    public function getDataInici()
+    public function getDatainici()
     {
-        return $this->dataInici;
+        return $this->datainici;
     }
 
     /**
-     * Set dataFi
+     * Set datafi
      *
-     * @param \DateTime $dataFi
+     * @param \DateTime $datafi
      *
      * @return Obra
      */
-    public function setDataFi($dataFi)
+    public function setDatafi($datafi)
     {
-        $this->dataFi = $dataFi;
+        $this->datafi = $datafi;
 
         return $this;
     }
 
     /**
-     * Get dataFi
+     * Get datafi
      *
      * @return \DateTime
      */
-    public function getDataFi()
+    public function getDatafi()
     {
-        return $this->dataFi;
+        return $this->datafi;
+    }
+
+    /**
+     * Set idAgencia
+     *
+     * @param integer $idAgencia
+     *
+     * @return Obra
+     */
+    public function setIdAgencia($idAgencia)
+    {
+        $this->idAgencia = $idAgencia;
+
+        return $this;
+    }
+
+    /**
+     * Get idAgencia
+     *
+     * @return integer
+     */
+    public function getIdAgencia()
+    {
+        return $this->idAgencia;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 }
-

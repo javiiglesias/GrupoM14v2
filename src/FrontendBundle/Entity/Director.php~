@@ -1,0 +1,61 @@
+<?php
+
+namespace FrontendBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Director
+ *
+ * @ORM\Table(name="director")
+ * @ORM\Entity
+ */
+class Director
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="NIF", type="string", length=255, nullable=false)
+     */
+    private $nif;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Nom", type="string", length=255, nullable=false)
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Cognom1", type="string", length=255, nullable=false)
+     */
+    private $cognom1;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Cognom2", type="string", length=255, nullable=false)
+     */
+    private $cognom2;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_obra", type="integer", nullable=false)
+     */
+    private $idObra;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+}
+

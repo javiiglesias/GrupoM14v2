@@ -10,9 +10,14 @@ backend_directores:
     path:     /directores
     defaults: { _controller: BackendBundle:Directores:directores }
 
+#Obras
 backend_obras:
     path:     /obras
     defaults: { _controller: BackendBundle:Obras:obras }
+
+backend_add_obra:
+    path:     /add-obra
+    defaults: { _controller: BackendBundle:Obras:addObra }
 
 backend_proyectos:
     path:     /proyectos

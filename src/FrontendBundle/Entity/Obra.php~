@@ -1,0 +1,61 @@
+<?php
+
+namespace FrontendBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Obra
+ *
+ * @ORM\Table(name="obra")
+ * @ORM\Entity
+ */
+class Obra
+{
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Nom", type="string", length=255, nullable=false)
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Descripcio", type="string", length=255, nullable=false)
+     */
+    private $descripcio;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="DataInici", type="date", nullable=false)
+     */
+    private $datainici;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="DataFi", type="date", nullable=false)
+     */
+    private $datafi;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id_agencia", type="integer", nullable=false)
+     */
+    private $idAgencia;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+
+}
+
