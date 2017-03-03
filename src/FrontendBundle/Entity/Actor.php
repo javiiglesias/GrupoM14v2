@@ -72,8 +72,8 @@ class Actor
     protected $tipoActor;
     
     /**
-     * @ORM\ManyToOne(targetEntity="Obra", inversedBy="actores")
-     * @ORM\JoinColumn(name="id_obra", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Obra", inversedBy="actores",cascade={"persist"})
+     * @ORM\JoinColumn(name="id_obra", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $obra;
 

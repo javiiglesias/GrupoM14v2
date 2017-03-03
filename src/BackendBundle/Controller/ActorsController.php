@@ -38,7 +38,7 @@ class ActorsController extends Controller {
                     'label' => 'Foto',))
                 ->add('obra', EntityType::class, array(
                     'label' => 'Obra en la que participa:',
-                    'class' => 'FrontendBundle:Actor',
+                    'class' => 'FrontendBundle:Obra',
                     'choice_label' => 'nom',
                     'multiple' => FALSE
                 ))
@@ -51,7 +51,7 @@ class ActorsController extends Controller {
                 ->add('save', SubmitType::class, array('label' => 'Crear Actor',
                     'attr' => array(
                         'class' => 'btn btn-warning mt')
-                    ))
+                ))
                 ->getForm();
 
         $form->handleRequest($request); //agafa les dades del formulari
@@ -64,6 +64,12 @@ class ActorsController extends Controller {
             $em->persist($actor);
             $em->flush(); //inserta un nou registre
 
+            $this->get('session')->getFlashBag()->add(
+                    'notice', array(
+                'type' => 'success',
+                'msg' => 'S\'ha afegit l\'actor'
+            ));
+
             return $this->forward('BackendBundle:Actors:actors');
         }
 
@@ -72,7 +78,7 @@ class ActorsController extends Controller {
                     'form' => $form->createView(),
         ));
     }
-    
+
     public function addTipusActorAction(Request $request) {
         $tipoActor = new TipoActor();
         $form = $this->createFormBuilder($tipoActor)
@@ -89,6 +95,12 @@ class ActorsController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($tipoActor);
             $em->flush(); //inserta un nou registre
+            
+            $this->get('session')->getFlashBag()->add(
+                    'notice', array(
+                'type' => 'success',
+                'msg' => 'S\'ha afegit el tipus d\'actor'
+            ));
 
             return $this->redirect($this->generateurl('backend_actors'));
         }
@@ -128,7 +140,7 @@ class ActorsController extends Controller {
                 ->add('save', SubmitType::class, array('label' => 'Editar Actor',
                     'attr' => array(
                         'class' => 'btn btn-warning mt')
-                    ))
+                ))
                 ->getForm();
         $form->handleRequest($request);
 
@@ -139,6 +151,12 @@ class ActorsController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($actor);
             $em->flush();
+
+            $this->get('session')->getFlashBag()->add(
+                    'notice', array(
+                'type' => 'success',
+                'msg' => 'S\'ha modificat l\'actor'
+            ));
 
             return $this->forward('BackendBundle:Actors:actors');
         }
@@ -152,12 +170,23 @@ class ActorsController extends Controller {
     public function deleteActorAction($id) {
         $actor = $this->getDoctrine()->getRepository('FrontendBundle:Actor')->findOneById($id);
         if ($actor != null) {
-             $em = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getManager();
             $em->remove($actor);
             $em->flush();
-            return $this->redirect($this->generateurl('backend_actors'));
-        }       
-        
+
+            $this->get('session')->getFlashBag()->add(
+                    'notice', array(
+                'type' => 'success',
+                'msg' => 'S\'ha eliminat l\'actor'
+            ));
+        } else {
+            $this->get('session')->getFlashBag()->add(
+                    'notice', array(
+                'type' => 'danger',
+                'msg' => 'No s\'ha eliminat l\'actor'
+            ));
+        }
+        return $this->redirect($this->generateurl('backend_actors'));
     }
 
 }

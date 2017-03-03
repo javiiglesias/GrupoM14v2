@@ -27,7 +27,7 @@ class ObresController extends Controller {
                     'array' => $obra
         ));
     }
-    
+
     /**
      * Crea formulari i afegeix una nova obra 
      */
@@ -53,16 +53,17 @@ class ObresController extends Controller {
                     'label' => 'Data Inici:',
                     'widget' => 'single_text',
                     'html5' => false,
+                    'format' => 'dd/mm/yyyy',
                     'attr' => ['class' => 'js-datepicker']))
                 ->add('DataFi', DateType::class, array(
                     'label' => 'Data Final:',
                     'widget' => 'single_text',
                     'html5' => false,
-                    'format' => 'dd/MM/yyyy',
+                    'format' => 'dd/mm/yyyy',
                     'attr' => ['class' => 'js-datepicker']))
                 ->add('save', SubmitType::class, array('label' => 'Crear Obra',
                     'attr' => array(
-                    'class' => 'btn btn-warning mt')))
+                        'class' => 'btn btn-warning mt')))
                 ->getForm();
 
         $form->handleRequest($request); //agafa les dades del formulari
@@ -75,6 +76,12 @@ class ObresController extends Controller {
             $em->persist($obra);
             $em->flush(); //inserta un nou registre
 
+            $this->get('session')->getFlashBag()->add(
+                    'notice',array(
+                    'type' => 'success',
+                    'msg' => 'S\'ha afegit l\'obra'
+            ));
+
             return $this->redirect($this->generateurl('backend_obres'));
         }
 
@@ -83,7 +90,7 @@ class ObresController extends Controller {
                     'form' => $form->createView()
         ));
     }
-    
+
     /**
      * Crea formulari i afegeix un nou tipus d'obra 
      */
@@ -103,6 +110,12 @@ class ObresController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($tipoObra);
             $em->flush(); //inserta un nou registre
+            
+            $this->get('session')->getFlashBag()->add(
+                    'notice',array(
+                    'type' => 'success',
+                    'msg' => 'S\'ha afegit el tipus d\'obra'
+            ));
 
             return $this->redirect($this->generateurl('backend_obres'));
         }
@@ -112,7 +125,7 @@ class ObresController extends Controller {
                     'form' => $form->createView(),
         ));
     }
-    
+
     /**
      * Troba l'obra a modificar amb el formulari i ho modifica
      */
@@ -156,6 +169,11 @@ class ObresController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($obra);
             $em->flush();
+            $this->get('session')->getFlashBag()->add(
+                    'notice',array(
+                    'type' => 'success',
+                    'msg' => 'S\'ha modificat l\'obra'
+            ));
 
             return $this->redirect($this->generateurl('backend_obres'));
         }
@@ -176,10 +194,21 @@ class ObresController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->remove($obra);
             $em->flush();
+            $this->get('session')->getFlashBag()->add(
+                    'notice',array(
+                    'type' => 'success',
+                    'msg' => 'S\'ha eliminat l\'obra'
+            ));
+        }else{
+            $this->get('session')->getFlashBag()->add(
+                    'notice',array(
+                    'type' => 'danger',
+                    'msg' => 'No s\'ha eliminat l\'obra'
+            ));
         }
         return $this->redirect($this->generateurl('backend_obres'));
     }
-    
+
     /**
      * Mostra els detalls d'un obra especifica
      */
@@ -188,7 +217,6 @@ class ObresController extends Controller {
         return $this->render('BackendBundle:Default:destallsobra.html.twig', array(
                     'array' => $obra
         ));
-    }    
-    
+    }
 
 }

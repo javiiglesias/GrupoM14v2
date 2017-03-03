@@ -51,14 +51,14 @@ class Obra
     private $datafi;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Agencia", inversedBy="obra")
-     * @ORM\JoinColumn(name="id_agencia", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Agencia", inversedBy="obra",cascade={"persist"})
+     * @ORM\JoinColumn(name="id_agencia", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $agencia;    
     
     /**
-     * @ORM\ManyToOne(targetEntity="TipoObra", inversedBy="obras")
-     * @ORM\JoinColumn(name="id_obra", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="TipoObra", inversedBy="obras",cascade={"persist"})
+     * @ORM\JoinColumn(name="id_obra", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $tipoObra;
     
@@ -74,8 +74,8 @@ class Obra
     }
     
     /**
-     * @ORM\ManyToOne(targetEntity="Director", inversedBy="obras")
-     * @ORM\JoinColumn(name="id_director", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="Director", inversedBy="obras",cascade={"persist"})
+     * @ORM\JoinColumn(name="id_director", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $director;
 

@@ -1,65 +1,71 @@
 {% extends "BackendBundle:Default:base.html.twig" %}
 {% block title %}Obras{% endblock %}
 {% block content %}
-        <div class="col-lg-12">            
-            <div class="content-backend">
-                <h1>Obres</h1>
-                <div class="content-gestio">
-                    <div class="row">
-                        <div class="col-lg-4 col-lg-push-7">                                                        
-                            <a href="{{ path('backend_add_obra') }}" class="btn btn-success" role="button"> <i class="fa fa-plus"></i> Afegir Obra</a>
-                            <a href="{{ path('backend_add_tipuObra') }}" class="btn btn-success" role="button"> <i class="fa fa-plus"></i>Afegir Tipus Obra </a>
-                        </div>        
-                    </div>
+    <div class="col-lg-12">            
+        <div class="content-backend">
+            <h1>Obres</h1>
+            {% for flashMessage in app.session.flashbag.get('notice') %}
+                <div class="alert alert-{{ flashMessage.type }}">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="text-center">{{ flashMessage.msg }}</h4>
                 </div>
+            {% endfor %}
+            <div class="content-gestio">
+                <div class="row">
+                    <div class="col-lg-4 col-lg-push-7">                                                        
+                        <a href="{{ path('backend_add_obra') }}" class="btn btn-success" role="button"> <i class="fa fa-plus"></i> Afegir Obra</a>
+                        <a href="{{ path('backend_add_tipuObra') }}" class="btn btn-success" role="button"> <i class="fa fa-plus"></i>Afegir Tipus Obra </a>
+                    </div>        
+                </div>
+            </div>
 
-                <div class="table-responsive">
-                    <table class="table table-bordered">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Id</th>
+                        <th>Nom</th>
+                        <th>Descripció</th>
+                        <th>Data Inici</th>
+                        <th>Data Final</th>
+                        <th>Tipus d'obra</th>
+                        <th>Detalls</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+
+                    {% for obras in array %}
                         <tr>
-                            <th>Id</th>
-                            <th>Nom</th>
-                            <th>Descripció</th>
-                            <th>Data Inici</th>
-                            <th>Data Final</th>
-                            <th>Tipus d'obra</th>
-                            <th>Detalls</th>
-                            <th>Editar</th>
-                            <th>Eliminar</th>
+                            <td>{{ obras.id}}</td>
+                            <td>{{ obras.nom}}</td>
+                            <td>{{ obras.descripcio}}</td>
+                            <td>{{obras.datainici |date('d/m/Y')}}</td>
+                            <td>{{obras.datafi |date('d/m/Y')}}</td>
+                            <td>{{obras.tipoObra.descripcio}}</td>
+                            <td><a class="btn btn-warning btn-sm" href="{{ path('backend_detalls_obra', { 'id': obras.id }) }}"><span class="fa fa-file-text"></span></a></td>
+                            <td><a class="btn btn-primary btn-sm" href="{{ path('backend_edit_obra', { 'id': obras.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                            <td><a class="btn btn-danger btn-sm" href="{{ path('backend_delete_obra', { 'id': obras.id }) }}"><span class="glyphicon glyphicon-trash"></span></a></td>                                 
                         </tr>
-
-                        {% for obras in array %}
-                            <tr>
-                                <td>{{ obras.id}}</td>
-                                <td>{{ obras.nom}}</td>
-                                <td>{{ obras.descripcio}}</td>
-                                <td>{{obras.datainici |date('d/m/Y')}}</td>
-                                <td>{{obras.datafi |date('d/m/Y')}}</td>
-                                <td>{{obras.tipoObra.descripcio}}</td>
-                                <td><a class="btn btn-warning btn-sm" href="{{ path('backend_detalls_obra', { 'id': obras.id }) }}"><span class="fa fa-file-text"></span></a></td>
-                                <td><a class="btn btn-primary btn-sm" href="{{ path('backend_edit_obra', { 'id': obras.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a></td>
-                                <td><a class="btn btn-danger btn-sm" href="{{ path('backend_delete_obra', { 'id': obras.id }) }}"><span class="glyphicon glyphicon-trash"></span></a></td>                                 
-                            </tr>
-                            <!-- Eliminar -->
-                            <div class="modal fade" id="eliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header bg-warning">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                            <h4 class="modal-title" id="myModalLabel">Eliminar Obra</h4>
-                                        </div>
-                                        <div class="modal-body">
-                                            <h4>Estas segur que vols eliminar aquesta Obra?</h4>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-                                            <a type="button" class="btn btn-success" href="{{ path('backend_delete_obra', { 'id': obras.id }) }}" >Si</a>
-                                        </div>                                                                           
+                        <!-- Eliminar -->
+                        <div class="modal fade" id="eliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-warning">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Eliminar Obra</h4>
                                     </div>
+                                    <div class="modal-body">
+                                        <h4>Estas segur que vols eliminar aquesta Obra?</h4>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                                        <a type="button" class="btn btn-success" href="{{ path('backend_delete_obra', { 'id': obras.id }) }}" >Si</a>
+                                    </div>                                                                           
                                 </div>
-                                /<div>
-                                {% endfor %}                        
-                                </table>
                             </div>
+                            /<div>
+                            {% endfor %}                        
+                            </table>
                         </div>
-                </div>        
+                    </div>
+            </div>        
         {% endblock %}

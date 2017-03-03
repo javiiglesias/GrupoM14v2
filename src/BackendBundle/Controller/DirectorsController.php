@@ -45,6 +45,12 @@ class DirectorsController extends Controller {
             $em->persist($director);
             $em->flush(); //inserta un nou registre
 
+            $this->get('session')->getFlashBag()->add(
+                    'notice', array(
+                'type' => 'success',
+                'msg' => 'S\'ha afegir el director'
+            ));
+
             return $this->redirect($this->generateurl('backend_directors'));
         }
 
@@ -78,6 +84,12 @@ class DirectorsController extends Controller {
             $em->persist($director);
             $em->flush();
 
+            $this->get('session')->getFlashBag()->add(
+                    'notice', array(
+                'type' => 'success',
+                'msg' => 'S\'ha modificat el director'
+            ));
+
             return $this->redirect($this->generateurl('backend_directors'));
         }
 
@@ -90,9 +102,25 @@ class DirectorsController extends Controller {
     public function deleteDirectorAction($id) {
 
         $director = $this->getDoctrine()->getRepository('FrontendBundle:Director')->findOneById($id);
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($director);
-        $em->flush();
+
+        if ($director != null) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($director);
+            $em->flush();
+            
+            $this->get('session')->getFlashBag()->add(
+                    'notice',array(
+                    'type' => 'success',
+                    'msg' => 'S\'ha eliminat el director'
+            ));
+        }else{
+            $this->get('session')->getFlashBag()->add(
+                    'notice',array(
+                    'type' => 'success',
+                    'msg' => 'No s\'ha eliminat el director'
+            ));
+        }
+
         return $this->redirect($this->generateurl('backend_directors'));
     }
 

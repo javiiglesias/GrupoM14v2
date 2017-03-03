@@ -42,7 +42,7 @@ class Director
     private $cognom2;
 
     /**
-     * @ORM\OneToMany(targetEntity="Obra", mappedBy="director")
+     * @ORM\OneToMany(targetEntity="Obra", mappedBy="director",cascade={"all"})
      */
     private $obras;
 
