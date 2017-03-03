@@ -3,6 +3,7 @@
 namespace FrontendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * TipoObra
@@ -10,21 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="tipo_obra", uniqueConstraints={@ORM\UniqueConstraint(name="UNIQ_24C1BAF811D3633A", columns={"id"})})
  * @ORM\Entity
  */
-class TipoObra
-{
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Descripcio", type="string", length=255, nullable=false)
-     */
-    private $descripcio;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_obra", type="integer", nullable=false)
-     */
-    private $idObra;
+class TipoObra {
 
     /**
      * @var integer
@@ -35,7 +22,12 @@ class TipoObra
      */
     private $id;
 
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Descripcio", type="string", length=255, nullable=false)
+     */
+    private $descripcio;
 
     /**
      * Set descripcio
@@ -44,8 +36,7 @@ class TipoObra
      *
      * @return TipoObra
      */
-    public function setDescripcio($descripcio)
-    {
+    public function setDescripcio($descripcio) {
         $this->descripcio = $descripcio;
 
         return $this;
@@ -56,34 +47,20 @@ class TipoObra
      *
      * @return string
      */
-    public function getDescripcio()
-    {
+    public function getDescripcio() {
         return $this->descripcio;
     }
 
     /**
-     * Set idObra
-     *
-     * @param integer $idObra
-     *
-     * @return TipoObra
+     * @ORM\OneToMany(targetEntity="Obra", mappedBy="TipoObra")
      */
-    public function setIdObra($idObra)
-    {
-        $this->idObra = $idObra;
+    protected $obras;
 
-        return $this;
+    public function __construct() {
+        $this->setDescripcio("");
+        $this->obras = new ArrayCollection();
     }
 
-    /**
-     * Get idObra
-     *
-     * @return integer
-     */
-    public function getIdObra()
-    {
-        return $this->idObra;
-    }
 
     /**
      * Get id
@@ -93,5 +70,39 @@ class TipoObra
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Add obra
+     *
+     * @param \FrontendBundle\Entity\Obra $obra
+     *
+     * @return TipoObra
+     */
+    public function addObra(\FrontendBundle\Entity\Obra $obra)
+    {
+        $this->obras[] = $obra;
+
+        return $this;
+    }
+
+    /**
+     * Remove obra
+     *
+     * @param \FrontendBundle\Entity\Obra $obra
+     */
+    public function removeObra(\FrontendBundle\Entity\Obra $obra)
+    {
+        $this->obras->removeElement($obra);
+    }
+
+    /**
+     * Get obras
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getObras()
+    {
+        return $this->obras;
     }
 }

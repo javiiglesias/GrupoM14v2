@@ -3,16 +3,33 @@
 namespace FrontendBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use FrontendBundle\Entity\Actor;
 
-class DefaultController extends Controller
+
+class ActorsController extends Controller
 {
-    public function indexAction()
+    public function actorsAction()
     {
-        return $this->render('FrontendBundle:Default:index.html.twig');
+        $actors= $this->getDoctrine()->getRepository('FrontendBundle:Actor')->findAll();
+        $tipusobra = $this->getDoctrine()->getRepository('FrontendBundle:TipoObra')->findAll();
+        $obres = $this->getDoctrine()->getRepository('FrontendBundle:obra')->findAll();
+        return $this->render('FrontendBundle:Default:mostraractors.html.twig', array(
+                    'array' => $actors,
+                    'obres' => $obres,
+                    'tipusObra' => $tipusobra,
+        ));
     }
-
-    public function quienessomosAction()
+    
+     public function filtreSexeAction($sexe)
     {
-        return $this->render('FrontendBundle:Default:quienessomos.html.twig');
+        $actors = $this->getDoctrine()->getRepository('FrontendBundle:Actor')->findBySexe($sexe);
+ 
+        $tipusobra = $this->getDoctrine()->getRepository('FrontendBundle:TipoObra')->findAll();
+        return $this->render('FrontendBundle:Default:mostraractors.html.twig', array(
+                    'array' => $actors,
+                    'tipusObra' => $tipusobra,
+        ));
     }
+        
+    
 }

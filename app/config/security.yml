@@ -1,24 +1,44 @@
-# To get started with security, check out the documentation:
-# http://symfony.com/doc/current/security.html
 security:
-
-    # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
-    providers:
-        in_memory:
-            memory: ~
-
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
-        main:
+        main: 
+            pattern: ^/backend
             anonymous: ~
-            # activate different ways to authenticate
-
-            # http_basic: ~
-            # http://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-
-            # form_login: ~
-            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+            provider: in_memory
+#            provider: agencia_provider
+            form_login: 
+                #redirige al formulario de login
+                login_path: backend_login 
+                #comprueba la sesion
+                check_path: backend_login
+                #Al iniciar sesión se redirige a la pagina principal del backend
+                default_target_path: backend_homepage
+            logout:
+              path: /backend/logout
+              target: /backend/login
+            
+    #La opción access_control indica qué tipo de usuarios pueden acceder a cada tipo de URL.
+    access_control:
+        - { path: ^/backend/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/agencia/*, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        #La opción roles indica de qué tipo debe ser el usuario para poder acceder.
+        - { path: ^/backend/*, roles: ROLE_ADMIN }
+        - { path: ^/agencia/*, roles: ROLE_ADMIN }
+        
+    providers:
+        in_memory:
+            memory:
+                users:
+                    admin:
+                        password: 123
+                        roles: 'ROLE_ADMIN'
+        agencia_provider:
+            entity: 
+                class: FrontendBundle:Usuario
+                property: nombre 
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+#        FrontendBundle\Entity\Usuario: sha512

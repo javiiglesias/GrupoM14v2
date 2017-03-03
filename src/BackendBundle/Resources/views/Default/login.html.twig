@@ -1,30 +1,72 @@
-{% extends "FrontendBundle:Default:base.html.twig" %}
-{% block title %}Login{% endblock %}
-{% block content %}
-<div class="container">
-                <div class="col-xs-8 col-sm-8  col-md-4 col-xs-offset-3 col-sm-offset-4 col-md-offset-5">
-                    <img src="#" class="img-responsive img-Logologin">
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+
+        <title>{% block title %}Login{% endblock %}</title>
+        {% block stylesheets %}
+            <!-- Estils -->            
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+            <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/paper/bootstrap.min.css"/>
+            <link rel="stylesheet" type="text/css" href="{{asset('public/css/estil.css?<php time();?>') }}"/>            
+            <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+            <link rel="icon" type="image/x-icon" href="{{ asset('public/image/icon01.png') }}" />
+
+        {% endblock %}
+        <script src="{{asset('assets/js/chart-master/Chart.js') }}"></script>
+
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body class="body-login">
+
+        {% block content %}
+            <div class="pull-left" class="login-arrow">
+                <a href="{{path('frontend_homepage')}}"><span class="fa fa-arrow-left fa-3x"></span></a>
+            </div>
+            <div class="container">                               
+                <div class="col-xs-8 col-sm-8  col-md-4 col-xs-offset-3 col-sm-offset-4 col-md-offset-4">
+                    <img src="{{ asset('public/image/logo_white.png') }}" class="img-responsive img-Logo login">
                 </div>
-                <div class="col-xs-11 col-md-4 col-xs-offset-1 col-md-offset-4 ">                    
-                    <div class="container-login">                        
-                        <form action="" method="POST">                             
-                            <h1 class="text-center">Iniciar Sesión</h1>
+                <div class="col-xs-11 col-md-4 col-xs-offset-1 col-md-offset-4">                        
+                    <div class="container-login mt">
+                        <div class="head-login">
+                            <h1 class="text-center">Iniciar Sessió</h1>
+                        </div>
+                        {% if error %}
+                            <div class="text-center text-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <p class="text-center text-success" style="font-size:20px;"><strong>  {{app.user.username | title}} ja has iniciat sessió! </strong></p>  
+                            <div class="col-xs-12 col-xs-offset-3">
+                                <a href="{{path('backend_homepage')}}" class="btn btn-warning text-white">Entrar al backend</a>
+                            </div>
+                        <form action="{{path('backend_login')}}" method="POST" class="form-login" hidden> {# SI S'ESTÀ INICIAT SESSIÓ NO MOSTRA EL FORMULARI#}
+                        {% else %}      
+                        <form action="{{path('backend_login')}}" method="POST" class="form-login">
                             <div class="form-group">
-                                <label>Usuario:</label>
-                                <input type="text" name="usuari" value="" class="form-control">
+                                <label>Usuari:</label>
+                                <input type="text" name="_username" value="{{ last_username | default('')}}" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label>Contraseña:</label>
-                                <input type="password" name="pass" class="form-control">
-                            </div>
-                            <p>Recordar usuario <input type="checkbox" name="recordarUsuari"><p>
-                            <p><a href="">Registrarse como usuario</a></p>
+                                <label>Contrasenya:</label>
+                                <input type="password" name="_password" class="form-control"/>
+                            </div>                                                     
                             <div class="col-xs-10 col-md-9 col-md-offset-3 col-xs-offset-2">
-                                <button name="Submit" class="btn btn-info"> Entrar <image class="btn-icon" src="#"/> </button>
+                                <button type="submit" name="Submit" class="btn btn-warning"> Entrar </button>
                             </div>
                         <form>
+                        {%endif%}
                     </div>                    
                 </div>
-</div>
+            </div>
 {% endblock %}
-
+ </body>
+ </html>

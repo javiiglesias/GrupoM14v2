@@ -1,35 +1,52 @@
 {% extends "FrontendBundle:Default:base.html.twig" %}
-{% block title %}¿Quienes Somos?{% endblock %}
+{% block title %}Qui Som?{% endblock %}
 {% block head %} 
     <header class="container-header">
         <div class="container">
-            <h1>¿Quienes Somos?</h1>
+            <h1>Qui Som?</h1>
         </div>                
     </header>
 {% endblock %}
 {% block content %}
     <div class="container">
-        <div class="col-lg-12">
-            <div class="page-text">
-                <p>En 1992 se ponen en marcha la creación de la Agencia de Actores.</p>
+        <div class="col-lg-12 mt">
+            <div class="col-lg-5">                
+                <div class="page-text">
+                    <br>
+                    <h3 class="text-center">Agència d'actors</h3>
+                    <p>En 1992 comencen la creació de l'Agència d'Actors.</p>
+                    <p>Des de llavors estem orgullosos d'ocupar-nos de les carreres d'alguns dels més 
+                        destacats actors i actrius d'Espanya que han dipositat en nosaltres la seva confiança 
+                        per assistir-los en la seva contractació amb els més prestigiosos directors de cinema 
+                        i les més importants productores audiovisuals nacionals i internacionals.</p>                    
+                </div>
+            </div>
+            <div class="col-lg-7">               
+                <img src="{{ asset('public/image/agencia.jpeg') }}" class="img-responsive img-quisom">
+            </div>
+            <div class="col-lg-12">
+                <div class="page-text">
+                    <p>L'agència s'ocupa d'estudiar els projectes en marxa en la indústria audiovisual, 
+                        proposar als seus representats als directors de repartiment i negociar la seva 
+                        contractació amb productors de Cinema, Teatre, Televisió i Publicitat. Part important 
+                        del treball diari és l'assistència tècnica, jurídica i professional als artistes, la gestió 
+                        de premsa i comunicació i el treball actiu per a la seva promoció tant dins com fora d'Espanya.</p>
 
-                <p>Desde entonces estamos orgullosos de ocuparnos de las carreras de algunos de los mas destacados actores 
-                    y actrices de España que han depositado en nosotros su confianza para asistirles en su contratación con 
-                    los más prestigiosos directores de cine y las mas importantes productoras audiovisuales nacionales 
-                    e internacionales.</p>
-
-                <p>La agencia se ocupa de estudiar los proyectos en marcha en la industria audiovisual, proponer a sus 
-                    representados a los directores de reparto y negociar su contratación con productoras de Cine, Teatro, 
-                    Televisión y Publicidad. Parte importante del trabajo diario es la asistencia técnica, jurídica y profesional 
-                    a los artistas, la gestión de prensa y comunicación y el trabajo activo para su promoción tanto dentro como 
-                    fuera de España.</p>
-
-                <p>Desde hace años por medio de nuestra propia productora audiovisual, intentamos hacernos 
-                    presentes en aquellos proyectos que consideramos que son interesantes para nuestros representados y que con la
-                    presencia directa podemos ayudar e impulsar.</p>
+                    <p>Des de fa anys per mitjà de la nostra pròpia productora audiovisual, intentem fer-nos 
+                        presents en aquells projectes que considerem que són interessants per als nostres 
+                        representats i que amb la nostra presència directa podem ajudar i impulsar.</p>            
+                </div>
             </div>
         </div>
     </div>
+</div>
+{% endblock %}
 
-
+ {% block tipusObra %}
+    {% for tipus in tipusObra %}
+        <ul>
+            <li name="idobra" hidden>{{ tipus.id}}</li>                                
+            <li><a href="{{path('frontend_mostrar_tipoobra', { 'id': tipus.id })}}">{{ tipus.Descripcio}}</a></li>                                
+        </ul>
+    {% endfor %}
 {% endblock %}

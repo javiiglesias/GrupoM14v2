@@ -3,6 +3,7 @@
 namespace FrontendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Obra
@@ -12,6 +13,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Obra
 {
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+    
     /**
      * @var string
      *
@@ -41,22 +51,33 @@ class Obra
     private $datafi;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_agencia", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="Agencia", inversedBy="obra")
+     * @ORM\JoinColumn(name="id_agencia", referencedColumnName="id")
      */
-    private $idAgencia;
-
+    protected $agencia;    
+    
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\ManyToOne(targetEntity="TipoObra", inversedBy="obras")
+     * @ORM\JoinColumn(name="id_obra", referencedColumnName="id")
      */
-    private $id;
+    protected $tipoObra;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Actor", mappedBy="obra")
+     */
+    protected $actores;
 
-
+    public function __construct() {
+        $this->setNom("");
+        $this->setDescripcio("");
+        $this->actores = new ArrayCollection();
+    }
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Director", inversedBy="obras")
+     * @ORM\JoinColumn(name="id_director", referencedColumnName="id")
+     */
+    protected $director;
 
     /**
      * Set nom
@@ -153,30 +174,7 @@ class Obra
     {
         return $this->datafi;
     }
-
-    /**
-     * Set idAgencia
-     *
-     * @param integer $idAgencia
-     *
-     * @return Obra
-     */
-    public function setIdAgencia($idAgencia)
-    {
-        $this->idAgencia = $idAgencia;
-
-        return $this;
-    }
-
-    /**
-     * Get idAgencia
-     *
-     * @return integer
-     */
-    public function getIdAgencia()
-    {
-        return $this->idAgencia;
-    }
+    
 
     /**
      * Get id
@@ -186,5 +184,112 @@ class Obra
     public function getId()
     {
         return $this->id;
+    }
+        
+    
+    /**
+     * Set tipoObra
+     *
+     * @param \FrontendBundle\Entity\TipoObra $tipoObra
+     *
+     * @return obras
+     */
+    public function setTipoObra(\FrontendBundle\Entity\TipoObra $tipoObra = null)
+    {
+        $this->tipoObra = $tipoObra;
+
+        return $this;
+    }
+
+    /**
+     * Get tipoObra
+     *
+     * @return \FrontendBundle\Entity\TipoObra
+     */
+    public function getTipoObra()
+    {
+        return $this->tipoObra;
+    }
+
+    /**
+     * Set agencia
+     *
+     * @param \FrontendBundle\Entity\Agencia $agencia
+     *
+     * @return Obra
+     */
+    public function setAgencia(\FrontendBundle\Entity\Agencia $agencia = null)
+    {
+        $this->agencia = $agencia;
+
+        return $this;
+    }
+
+    /**
+     * Get agencia
+     *
+     * @return \FrontendBundle\Entity\Agencia
+     */
+    public function getAgencia()
+    {
+        return $this->agencia;
+    }
+
+    /**
+     * Add actore
+     *
+     * @param \FrontendBundle\Entity\Actor $actore
+     *
+     * @return Obra
+     */
+    public function addActore(\FrontendBundle\Entity\Actor $actore)
+    {
+        $this->actores[] = $actore;
+
+        return $this;
+    }
+
+    /**
+     * Remove actore
+     *
+     * @param \FrontendBundle\Entity\Actor $actore
+     */
+    public function removeActore(\FrontendBundle\Entity\Actor $actore)
+    {
+        $this->actores->removeElement($actore);
+    }
+
+    /**
+     * Get actores
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getActores()
+    {
+        return $this->actores;
+    }
+
+    /**
+     * Set director
+     *
+     * @param \FrontendBundle\Entity\Director $director
+     *
+     * @return Obra
+     */
+    public function setDirector(\FrontendBundle\Entity\Director $director = null)
+    {
+        $this->director = $director;
+
+        return $this;
+    }
+
+    /**
+     * Get director
+     *
+     * @return \FrontendBundle\Entity\Director
+     */
+    public function getDirector()
+    {
+        return $this->director;
     }
 }

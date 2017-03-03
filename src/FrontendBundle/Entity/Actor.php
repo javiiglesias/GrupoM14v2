@@ -12,6 +12,17 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Actor
 {
+    
+     /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+   
     /**
      * @var string
      *
@@ -52,25 +63,19 @@ class Actor
      *
      * @ORM\Column(name="Foto", type="string", length=255, nullable=false)
      */
-    private $foto;
-
+    private $foto;  
+    
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_obra", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="TipoActor", inversedBy="Actor")
+     * @ORM\JoinColumn(name="id_actor", referencedColumnName="id")
      */
-    private $idObra;
-
+    protected $tipoActor;
+    
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @ORM\ManyToOne(targetEntity="Obra", inversedBy="actores")
+     * @ORM\JoinColumn(name="id_obra", referencedColumnName="id")
      */
-    private $id;
-
-
+    protected $obra;
 
     /**
      * Set nif
@@ -215,30 +220,7 @@ class Actor
     {
         return $this->foto;
     }
-
-    /**
-     * Set idObra
-     *
-     * @param integer $idObra
-     *
-     * @return Actor
-     */
-    public function setIdObra($idObra)
-    {
-        $this->idObra = $idObra;
-
-        return $this;
-    }
-
-    /**
-     * Get idObra
-     *
-     * @return integer
-     */
-    public function getIdObra()
-    {
-        return $this->idObra;
-    }
+    
 
     /**
      * Get id
@@ -248,5 +230,53 @@ class Actor
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set tipoActor
+     *
+     * @param \FrontendBundle\Entity\TipoActor $tipoActor
+     *
+     * @return Actor
+     */
+    public function setTipoActor(\FrontendBundle\Entity\TipoActor $tipoActor = null)
+    {
+        $this->tipoActor = $tipoActor;
+
+        return $this;
+    }
+
+    /**
+     * Get tipoActor
+     *
+     * @return \FrontendBundle\Entity\TipoActor
+     */
+    public function getTipoActor()
+    {
+        return $this->tipoActor;
+    }
+
+    /**
+     * Set obra
+     *
+     * @param \FrontendBundle\Entity\Obra $obra
+     *
+     * @return Actor
+     */
+    public function setObra(\FrontendBundle\Entity\Obra $obra = null)
+    {
+        $this->obra = $obra;
+
+        return $this;
+    }
+
+    /**
+     * Get obra
+     *
+     * @return \FrontendBundle\Entity\Obra
+     */
+    public function getObra()
+    {
+        return $this->obra;
     }
 }

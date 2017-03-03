@@ -1,11 +1,14 @@
 frontend:
     resource: "@FrontendBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /agencia
 
 backend:
     resource: "@BackendBundle/Resources/config/routing.yml"
     prefix:   /backend
-
+    
+logout:
+    path: /backend/logout
+    
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation

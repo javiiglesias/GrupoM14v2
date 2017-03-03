@@ -4,15 +4,19 @@ namespace FrontendBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DefaultController extends Controller
+class DirectorsController extends Controller
 {
-    public function indexAction()
+    public function directorsAction()
     {
-        return $this->render('FrontendBundle:Default:index.html.twig');
-    }
+        $director = $this->getDoctrine()->getRepository('FrontendBundle:Director')->findAll();
+        $tipusobra = $this->getDoctrine()->getRepository('FrontendBundle:TipoObra')->findAll();
+        $obres = $this->getDoctrine()->getRepository('FrontendBundle:obra')->findAll();
 
-    public function quienessomosAction()
-    {
-        return $this->render('FrontendBundle:Default:quienessomos.html.twig');
-    }
+        return $this->render('FrontendBundle:Default:mostrardirectors.html.twig', array(
+                    'array' => $director,
+                    'obres' => $obres,
+                    'tipusObra' => $tipusobra
+        ));
+    }  
+    
 }

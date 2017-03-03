@@ -1,2 +1,68 @@
 {% extends "BackendBundle:Default:base.html.twig" %}
-{% block title %}Directores{% endblock %}
+{% block title %}Directors{% endblock %}
+{% block content %}
+        <div class="col-lg-12">
+            <div class="content-backend">
+                <h1>Directors</h1>
+                <div class="content-gestio">
+                    <div class="row">
+                        <div class="col-lg-3 col-lg-push-9">
+                            <a href="{{ path('backend_add_director') }}" class="btn btn-success" role="button"> <i class="fa fa-plus"></i> Afegir Director</a>
+                        </div>        
+
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>ID</th>
+                            <th>NIF</th>
+                            <th>Nom</th>
+                            <th>Cognom1</th>
+                            <th>Cognom2</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
+                        </tr>
+
+                        {% for directors in array %}
+                            <tr>
+                                <td>{{ directors.id}}</td>
+                                <td>{{ directors.nif}}</td>
+                                <td>{{ directors.nom}}</td>
+                                <td>{{ directors.cognom1}}</td>
+                                <td>{{ directors.cognom2}}</td>                                
+                                <td><a class="btn btn-primary btn-sm" href="{{ path('backend_edit_director', { 'id': directors.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                                <td><a class="btn btn-danger btn-sm"  href="{{ path('backend_delete_director', { 'id': directors.id }) }}"><span class="glyphicon glyphicon-trash"></span></a></td>
+                            </tr>
+                            <!--  data-toggle="modal" data-target="#"  -->
+                            <!-- Eliminar -->
+                            <div class="modal fade" id="eliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-warning">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Eliminar Director</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h4>Estas segur que vols eliminar aquest Director?</h4>
+                                        </div>
+                                        <pre>
+                                            {{dump(directors.id)}}
+                                        </pre> 
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                                            <a type="button" class="btn btn-success" href="{{ path('backend_delete_director', { 'id': directors.id }) }}" >Si</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </table>
+                </div>
+            </div>
+
+        </div>        
+
+{% endblock %}

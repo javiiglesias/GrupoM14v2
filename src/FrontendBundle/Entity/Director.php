@@ -3,6 +3,7 @@
 namespace FrontendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Director
@@ -41,11 +42,17 @@ class Director
     private $cognom2;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_obra", type="integer", nullable=false)
+     * @ORM\OneToMany(targetEntity="Obra", mappedBy="director")
      */
-    private $idObra;
+    private $obras;
+
+    public function __construct() {
+        $this->setNif("");
+        $this->setNom("");
+        $this->setCognom1("");
+        $this->setCognom2("");
+        $this->obras = new ArrayCollection();
+    }
 
     /**
      * @var integer
@@ -153,30 +160,9 @@ class Director
     {
         return $this->cognom2;
     }
+   
 
-    /**
-     * Set idObra
-     *
-     * @param integer $idObra
-     *
-     * @return Director
-     */
-    public function setIdObra($idObra)
-    {
-        $this->idObra = $idObra;
 
-        return $this;
-    }
-
-    /**
-     * Get idObra
-     *
-     * @return integer
-     */
-    public function getIdObra()
-    {
-        return $this->idObra;
-    }
 
     /**
      * Get id
@@ -186,5 +172,39 @@ class Director
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Add obra
+     *
+     * @param \FrontendBundle\Entity\Obra $obra
+     *
+     * @return Director
+     */
+    public function addObra(\FrontendBundle\Entity\Obra $obra)
+    {
+        $this->obras[] = $obra;
+
+        return $this;
+    }
+
+    /**
+     * Remove obra
+     *
+     * @param \FrontendBundle\Entity\Obra $obra
+     */
+    public function removeObra(\FrontendBundle\Entity\Obra $obra)
+    {
+        $this->obras->removeElement($obra);
+    }
+
+    /**
+     * Get obras
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getObras()
+    {
+        return $this->obras;
     }
 }

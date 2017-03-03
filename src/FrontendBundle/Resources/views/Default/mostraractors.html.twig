@@ -1,16 +1,49 @@
 {% extends "FrontendBundle:Default:base.html.twig" %}
-{% block title %}Contacto{% endblock %}
+{% block title %}Actors{% endblock %}
 {% block head %} 
     <header class="container-header">
         <div class="container">
-            <h1>Contacto</h1>
+            <h1>Actors</h1>
         </div>                
     </header>
 {% endblock %}
 {% block content %}
-    <div class="container">
-        <div class="col-lg-12">
-            
+    <div class="container">        
+        <div class="row mt">
+            <div class="col-lg-12">
+                <div class="col-lg-7 col-lg-push-4">                    
+                    <a  href="{{path('frontend_mostrar_actors')}}" class="btn btn-warning text-white">Tots</a>
+                    <a  href="{{path('frontend_mostrar_actor', { 'sexe': 'male' })}}" class="btn btn-warning text-white">Actors</a>
+                    <a  href="{{path('frontend_mostrar_actriu', { 'sexe': 'female' })}}" class="btn btn-warning text-white">Actrius</a>
+                </div>
+            </div>
         </div>
+        <div class="row col-lg-12 ">
+                {% for actors in array %}	
+                    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 ">
+                        <div class="thumbnail col-lg-11 col-lg-pull-1 llibres text-center">
+                            <img src="{{asset('public/image/'~actors.foto)}}" class="img-responsive">
+                            <h5><strong>Nom:</strong>   </h5>
+                             <p>   {{actors.nom}}
+                               {{ actors.cognom1}}
+                               {{ actors.cognom2}}</p>
+                               {#{{ actors.obra}}</p>#}
+                            {% for obra in obres %}                            
+                            {% if obra.nom == actors.obra.nom%}  
+                                <p><strong>obra:</strong>   {{obra.nom}}</p>
+                            {% endif %}
+                        {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+        </div> 
     </div>
+{% endblock %}
+{% block tipusObra %}
+    {% for tipus in tipusObra %}
+        <ul>
+            <li name="idobra" hidden>{{ tipus.id}}</li>                                
+            <li><a href="{{path('frontend_mostrar_tipoobra', { 'id': tipus.id })}}">{{ tipus.Descripcio}}</a></li>                                
+        </ul>
+    {% endfor %}
 {% endblock %}

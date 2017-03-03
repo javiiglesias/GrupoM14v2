@@ -4,15 +4,27 @@ namespace FrontendBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class DefaultController extends Controller
+class ObresController extends Controller
 {
-    public function indexAction()
+    public function obresAction()
     {
-        return $this->render('FrontendBundle:Default:index.html.twig');
+        $obra = $this->getDoctrine()->getRepository('FrontendBundle:Obra')->findAll();
+        $tipusobra = $this->getDoctrine()->getRepository('FrontendBundle:TipoObra')->findAll();
+        return $this->render('FrontendBundle:Default:mostrarobres.html.twig', array(
+                    'array' => $obra,
+                    'tipusObra' => $tipusobra
+        ));
     }
-
-    public function quienessomosAction()
+    
+     public function mostrarTipusObraAction($id)
     {
-        return $this->render('FrontendBundle:Default:quienessomos.html.twig');
+        $obra = $this->getDoctrine()->getRepository('FrontendBundle:Obra')->findByTipoObra($id);
+ 
+        $tipusobra = $this->getDoctrine()->getRepository('FrontendBundle:TipoObra')->findAll();
+        return $this->render('FrontendBundle:Default:mostrarobres.html.twig', array(
+                    'array' => $obra,
+                    'tipusObra' => $tipusobra,
+        ));
     }
+    
 }

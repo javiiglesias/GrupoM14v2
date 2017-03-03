@@ -1,8 +1,3 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
 /* 
     Created on : 19-dic-2016, 16:36:25
     Author     : yaritza
@@ -14,9 +9,12 @@ and open the template in the editor.
 }
 
 
-
 a {
     color: #FE9F07 !important;
+}
+
+.mt {
+    margin-top: 30px;
 }
 /* ======= Header ========*/
 
@@ -69,8 +67,12 @@ a {
 }
 
 .navbar-inverse {
-    background-color: transparent !important;
+    /*background-color: transparent;*/
+    background-color: #000 !important;
+    opacity:0.9;
     border-color: #ccc;
+    font-weight: 700;
+    color:#fff !important;
 }
 
 .navbar-inverse .navbar-brand{
@@ -85,7 +87,7 @@ a {
     color:#FE9F07 !important;
     border-bottom:5px solid #FE9F07;
     text-shadow:1px 1px 1px #000;
-    background-color:rgba(69, 68, 68, 0.7) !important;
+    background-color:rgba(69, 68, 68, 0.6) !important;
 }
 
 .navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:hover, .navbar-inverse .navbar-nav > .open > a:focus {
@@ -96,6 +98,10 @@ a {
 .navbar-form {
     margin-top: 0px !important;
     margin-right: 0px !important;
+}
+
+.navbar-inverse .navbar-toggle .icon-bar{
+    background-color: none !important;
 }
 
 .img-brand{
@@ -121,10 +127,7 @@ a {
     min-width: 100%;
     height: 500px;
 }
-/* ======= Mostrar Llibres ========== */
-.llibres{
-    cursor:pointer;
-}
+
 
 
 .btn-inici{
@@ -245,27 +248,31 @@ a {
 }
 
 .caixa-contingut:hover {
-	box-shadow: 
-		inset 0 0 0 1px rgba(255,255,255,0.1),
-		0 1px 2px rgba(0,0,0,0.1);
+    box-shadow: 
+        inset 0 0 0 1px rgba(255,255,255,0.1),
+        0 1px 2px rgba(0,0,0,0.1);
 }
 
 .caixa-element:hover .caixa-contingut {
-	transform: scale(1);
-	opacity: 1;
+    transform: scale(1);
+    opacity: 1;
 }
 .caixa-element:hover .caixa-contingut p {
-	opacity: 1;
+    opacity: 1;
 }
 /* ======= content ========*/
 
 .page-text{
     font-size:18px;
-    padding:40px;
+    padding:20px;
     line-height: 2;
     text-align: justify;
 }
 
+
+.text-white {
+    color:#fff !important;
+}
 
 /* ======= taula ========== */
 th{
@@ -277,22 +284,63 @@ th{
     height:auto !important;
 }
 
+/* ======= Form ============== */
+
+
+label.required{
+    width: 100% !important;
+    font-weight: bolder;
+    font-size: 16px ;
+}
+
+input,select, textarea{
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn-contact{
+    margin-left: 20%;
+}
 
 /* ======= Login ========== */
 .body-login{
     min-width: 100%;
     height:300px !important;
-    background-image: url("../images/bg-login.jpg");
+    background-image: url("../image/slide3.jpg");
     background-size: cover;    
 
 }
 
+.head-login{
+    padding: 3px;
+    background-color:#FE9F07 !important; 
+   
+}
+
+.head-login h1{
+     color:#fff !important;
+     font-size: 25px !important;
+}
+
 .container-login{
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.9);
     height:380px;
-    padding:30px;
-    margin-top:20px;
     border-radius:6px;
+    margin-bottom: 40px;
+}
+
+.form-login{
+    font-size: 17px;
+    padding:30px;
 }
 
 .img-Logologin{
@@ -301,6 +349,15 @@ th{
     width:100px;
 }
 
+.login-arrow {
+    position:absolute;
+   
+}
+
+textarea:focus, textarea.form-control:focus, input.form-control:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, input[type="number"]:focus, .form-control[type="text"]:focus, .form-control[type="password"]:focus, .form-control[type="email"]:focus, .form-control[type="tel"]:focus, .form-control[contenteditable]:focus{
+    box-shadow: inset 0 -2px 0  #FE9F07 !important;
+    -webkit-box-shadow: inset 0 -2px 0  #FE9F07 !important;
+}
 /*-------------------------------Icons---------------------------------*/
 
 .icon{
@@ -363,7 +420,23 @@ th{
 
 }
 
+.pujar {
+    position: fixed;
+    top: 82%;
+    left: 95%;
+    color: #C00D0D;
+    cursor: pointer;
+}
+.img-logo-footer {
+        width:200px !important;
+    }
+
 @media (min-width: 992px) {
+    
+    .img-logo-footer {
+        margin-left:50px;
+    }
+
     .featurette-heading {
         margin-top: 120px;
     }
@@ -383,9 +456,25 @@ th{
         margin-left: -10px;
 
     }
+    .img-logo-footer {
+        margin-left:40px !important;
+    }
+    
+    .img-quisom {
+        margin-top:135px;
+    }
+    
+    .page-text{
+    font-size:15px;
+    padding:10px;
+    }
 }
 
 @media (min-width: 240px){
+    
+    .img-logo-footer {
+        width:100px ;
+    }
     .img-mostra{
         width: auto;
         height:220px !important;
@@ -400,4 +489,17 @@ th{
     .img-logoHeader{
         max-width: 230px;
     }
+    .img-logo-footer {
+        margin-left:10px !important;
+    }
+    .img-quisom {
+        width: 100%;
+        margin-top:20px;
+    }
+    
+    .page-text{
+    font-size:15px;
+    padding:10px;
+    }
+    
 }

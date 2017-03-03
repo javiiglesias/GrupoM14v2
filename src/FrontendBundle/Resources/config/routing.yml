@@ -1,15 +1,41 @@
+#===inici ===#  
 frontend_homepage:
     path:     /
-    defaults: { _controller: FrontendBundle:Inicio:inicio }
+    defaults: { _controller: FrontendBundle:Default:index }
 
-frontend_quienessomos:
-    path:     /quienessomos
-    defaults: { _controller: FrontendBundle:Default:quienessomos }
+#===Qui som ===#  
+frontend_quisom:
+    path:     /qui-som
+    defaults: { _controller: FrontendBundle:Default:quisom }
 
-frontend_contacto:
-    path:     /contacto
-    defaults: { _controller: FrontendBundle:Contacto:contacto }
+#===obra ===#  
+frontend_mostrar_obres:
+    path:     /mostrar-obres
+    defaults: { _controller: FrontendBundle:Obres:obres }
 
-frontend_login:
-    path:     /login
-    defaults: { _controller: FrontendBundle:Login:login }
+frontend_mostrar_tipoobra:
+    path:     /mostrar-tipo-obra/{id}
+    defaults: { _controller: FrontendBundle:Obres:mostrarTipusObra }
+
+#===Actors ===#  
+frontend_mostrar_actors:
+    path:     /mostrar-actors
+    defaults: { _controller: FrontendBundle:Actors:actors }
+    
+frontend_mostrar_actor:
+    path:     /mostrar-actor/{sexe}
+    defaults: { _controller: FrontendBundle:Actors:filtreSexe }
+    
+frontend_mostrar_actriu:
+    path:     /mostrar-actriu/{sexe}
+    defaults: { _controller: FrontendBundle:Actors:filtreSexe }
+
+#===Directors ===#
+frontend_mostrar_directors:
+    path:     /mostrar-directors
+    defaults: { _controller: FrontendBundle:Directors:directors }
+
+#===Contacte ===#
+frontend_contacte:
+    path:     /contacte
+    defaults: { _controller: FrontendBundle:Default:contacto }

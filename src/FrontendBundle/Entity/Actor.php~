@@ -12,6 +12,17 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Actor
 {
+    
+     /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+   
     /**
      * @var string
      *
@@ -52,24 +63,220 @@ class Actor
      *
      * @ORM\Column(name="Foto", type="string", length=255, nullable=false)
      */
-    private $foto;
+    private $foto;  
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="TipoActor", inversedBy="Actor")
+     * @ORM\JoinColumn(name="id_actor", referencedColumnName="id")
+     */
+    protected $tipoActor;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="Obra", inversedBy="actores")
+     * @ORM\JoinColumn(name="id_obra", referencedColumnName="id")
+     */
+    protected $obra;
 
     /**
-     * @var integer
+     * Set nif
      *
-     * @ORM\Column(name="id_obra", type="integer", nullable=false)
+     * @param string $nif
+     *
+     * @return Actor
      */
-    private $idObra;
+    public function setNif($nif)
+    {
+        $this->nif = $nif;
+
+        return $this;
+    }
 
     /**
-     * @var integer
+     * Get nif
      *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
+     * @return string
      */
-    private $id;
+    public function getNif()
+    {
+        return $this->nif;
+    }
 
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     *
+     * @return Actor
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
 
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set cognom1
+     *
+     * @param string $cognom1
+     *
+     * @return Actor
+     */
+    public function setCognom1($cognom1)
+    {
+        $this->cognom1 = $cognom1;
+
+        return $this;
+    }
+
+    /**
+     * Get cognom1
+     *
+     * @return string
+     */
+    public function getCognom1()
+    {
+        return $this->cognom1;
+    }
+
+    /**
+     * Set cognom2
+     *
+     * @param string $cognom2
+     *
+     * @return Actor
+     */
+    public function setCognom2($cognom2)
+    {
+        $this->cognom2 = $cognom2;
+
+        return $this;
+    }
+
+    /**
+     * Get cognom2
+     *
+     * @return string
+     */
+    public function getCognom2()
+    {
+        return $this->cognom2;
+    }
+
+    /**
+     * Set sexe
+     *
+     * @param string $sexe
+     *
+     * @return Actor
+     */
+    public function setSexe($sexe)
+    {
+        $this->sexe = $sexe;
+
+        return $this;
+    }
+
+    /**
+     * Get sexe
+     *
+     * @return string
+     */
+    public function getSexe()
+    {
+        return $this->sexe;
+    }
+
+    /**
+     * Set foto
+     *
+     * @param string $foto
+     *
+     * @return Actor
+     */
+    public function setFoto($foto)
+    {
+        $this->foto = $foto;
+
+        return $this;
+    }
+
+    /**
+     * Get foto
+     *
+     * @return string
+     */
+    public function getFoto()
+    {
+        return $this->foto;
+    }
+    
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set tipoActor
+     *
+     * @param \FrontendBundle\Entity\TipoActor $tipoActor
+     *
+     * @return Actor
+     */
+    public function setTipoActor(\FrontendBundle\Entity\TipoActor $tipoActor = null)
+    {
+        $this->tipoActor = $tipoActor;
+
+        return $this;
+    }
+
+    /**
+     * Get tipoActor
+     *
+     * @return \FrontendBundle\Entity\TipoActor
+     */
+    public function getTipoActor()
+    {
+        return $this->tipoActor;
+    }
+
+    /**
+     * Set obra
+     *
+     * @param \FrontendBundle\Entity\Obra $obra
+     *
+     * @return Actor
+     */
+    public function setObra(\FrontendBundle\Entity\Obra $obra = null)
+    {
+        $this->obra = $obra;
+
+        return $this;
+    }
+
+    /**
+     * Get obra
+     *
+     * @return \FrontendBundle\Entity\Obra
+     */
+    public function getObra()
+    {
+        return $this->obra;
+    }
 }
-

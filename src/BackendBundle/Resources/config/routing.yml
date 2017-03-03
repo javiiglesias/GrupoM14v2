@@ -1,24 +1,70 @@
+#==Inici==#
 backend_homepage:
     path:     /
     defaults: { _controller: BackendBundle:Default:index }
+#==Login==#
+backend_login:
+    path:     /login
+    defaults: { _controller: BackendBundle:Login:login }
+    
+backend_logout:
+    path:     /logout    
 
-backend_actores:
-    path:     /actores
-    defaults: { _controller: BackendBundle:Actores:actores }
-
-backend_directores:
-    path:     /directores
-    defaults: { _controller: BackendBundle:Directores:directores }
-
-#Obras
-backend_obras:
-    path:     /obras
-    defaults: { _controller: BackendBundle:Obras:obras }
+#==obres==#
+backend_obres:
+    path:     /obres
+    defaults: { _controller: BackendBundle:Obres:obres }
+    
+backend_add_tipuObra:
+    path:     /add-tipu_obra
+    defaults: { _controller: BackendBundle:Obres:addTipusObra }
 
 backend_add_obra:
     path:     /add-obra
-    defaults: { _controller: BackendBundle:Obras:addObra }
+    defaults: { _controller: BackendBundle:Obres:addObra }
+backend_detalls_obra:
+    path:     /detalls-obra/{id}
+    defaults: { _controller: BackendBundle:Obres:detallsObra }
 
-backend_proyectos:
-    path:     /proyectos
-    defaults: { _controller: BackendBundle:Proyectos:proyectos }
+backend_edit_obra:
+    path:     /edit-obra/{id}
+    defaults: { _controller: BackendBundle:Obres:editObra }
+
+backend_delete_obra:
+    path:     /delete-obra/{id}
+    defaults: { _controller: BackendBundle:Obres:deleteObra }
+
+#==Actors==#
+backend_actors:
+    path:     /actors
+    defaults: { _controller: BackendBundle:Actors:actors }
+backend_add_actor:
+    path:     /add-actor
+    defaults: { _controller: BackendBundle:Actors:addActor }
+backend_add_tipusActor:
+    path:     /add-tipus-actor
+    defaults: { _controller: BackendBundle:Actors:addTipusActor }
+backend_edit_actor:
+    path:     /edit-actor/{id}
+    defaults: { _controller: BackendBundle:Actors:editActor }
+
+backend_delete_actor:
+    path:     /delete-actor/{id}
+    defaults: { _controller: BackendBundle:Actors:deleteActor }
+
+#==Directors==#
+backend_directors:
+    path:     /directors
+    defaults: { _controller: BackendBundle:Directors:directors }
+backend_add_director:
+    path:     /add-director
+    defaults: { _controller: BackendBundle:Directors:addDirector }
+backend_edit_director:
+    path:     /edit-director/{id}
+    defaults: { _controller: BackendBundle:Directors:editDirector }
+
+backend_delete_director:
+    path:     /delete-director/{id}
+    defaults: { _controller: BackendBundle:Directors:deleteDirector }
+
+

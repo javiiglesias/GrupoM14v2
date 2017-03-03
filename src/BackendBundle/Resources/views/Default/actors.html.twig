@@ -1,2 +1,67 @@
 {% extends "BackendBundle:Default:base.html.twig" %}
-{% block title %}Actores{% endblock %}
+{% block title %}Actors{% endblock %}
+{% block content %}
+        <div class="col-lg-12">
+            <div class="content-backend">
+                <h1>Actors</h1>
+                <div class="content-gestio">
+                    <div class="row">
+                        <div class="col-lg-4 col-lg-push-8">
+                            <a href="{{ path('backend_add_actor') }}" class="btn btn-success" role="button"> <i class="fa fa-plus"></i> Afegir Actor</a>
+                            <a href="{{ path('backend_add_tipusActor') }}" class="btn btn-success" role="button"> <i class="fa fa-plus"></i> Afegir Paper</a>
+                        </div>        
+
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>NIF</th>
+                            <th>Nom</th>
+                            <th>Cognom1</th>
+                            <th>Cognom2</th>
+                            <th>Sexe</th>
+                            <th>Foto</th>
+                            <th>Paper</th>
+                            <th>Editar</th>
+                            <th>Eliminar</th>
+                        </tr>
+
+                        {% for actors in array %}
+                            <tr>
+                                <td>{{ actors.nif}}</td>
+                                <td>{{ actors.nom}}</td>
+                                <td>{{ actors.cognom1}}</td>
+                                <td>{{ actors.cognom2}}</td>
+                                <td>{{ actors.sexe}}</td>
+                                <td>{{ actors.foto}}</td>
+                                <td>{{ actors.tipoActor.papel}}</td>
+                                <td><a class="btn btn-primary btn-sm" href="{{ path('backend_edit_actor', { 'id': actors.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                                <td><a class="btn btn-danger btn-sm" data-toggle="modal" data-target="#eliminar" ><span class="glyphicon glyphicon-trash"></span></a></td>
+                            </tr>
+                            <!-- Eliminar -->
+                            <div class="modal fade" id="eliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-warning">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">Eliminar Actor</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h4>Estas segur que vols eliminar aquest Actor?</h4>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                                            <a type="button" class="btn btn-success" href="{{ path('backend_delete_actor', { 'id': actors.id }) }}"  >Si</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </table>
+                </div>
+            </div>
+        </div>           
+{% endblock %}

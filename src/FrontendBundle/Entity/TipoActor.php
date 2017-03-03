@@ -3,6 +3,7 @@
 namespace FrontendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * TipoActor
@@ -12,20 +13,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class TipoActor
 {
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="Papel", type="string", length=255, nullable=false)
-     */
-    private $papel;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id_actor", type="integer", nullable=false)
-     */
-    private $idActor;
-
+    
+    
     /**
      * @var integer
      *
@@ -34,8 +23,24 @@ class TipoActor
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Papel", type="string", length=255, nullable=false)
+     */
+    private $papel;
 
 
+    /**
+     * @ORM\OneToMany(targetEntity="Actor", mappedBy="TipoActor")
+     */
+    private $actors;
+
+    public function __construct() {
+        $this->setPapel("");
+        $this->actors = new ArrayCollection();
+    }
 
     /**
      * Set papel
@@ -59,31 +64,7 @@ class TipoActor
     public function getPapel()
     {
         return $this->papel;
-    }
-
-    /**
-     * Set idActor
-     *
-     * @param integer $idActor
-     *
-     * @return TipoActor
-     */
-    public function setIdActor($idActor)
-    {
-        $this->idActor = $idActor;
-
-        return $this;
-    }
-
-    /**
-     * Get idActor
-     *
-     * @return integer
-     */
-    public function getIdActor()
-    {
-        return $this->idActor;
-    }
+    }    
 
     /**
      * Get id
@@ -93,5 +74,39 @@ class TipoActor
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Add actor
+     *
+     * @param \FrontendBundle\Entity\Actor $actor
+     *
+     * @return TipoActor
+     */
+    public function addActor(\FrontendBundle\Entity\Actor $actor)
+    {
+        $this->actors[] = $actor;
+
+        return $this;
+    }
+
+    /**
+     * Remove actor
+     *
+     * @param \FrontendBundle\Entity\Actor $actor
+     */
+    public function removeActor(\FrontendBundle\Entity\Actor $actor)
+    {
+        $this->actors->removeElement($actor);
+    }
+
+    /**
+     * Get actors
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getActors()
+    {
+        return $this->actors;
     }
 }
