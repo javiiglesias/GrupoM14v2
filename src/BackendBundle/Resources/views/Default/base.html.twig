@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>{% block title %}Admin{% endblock %}</title>
+        <title>{% block title %}Gestió d'agència{% endblock %}</title>
         {% block stylesheets %}
             <!-- Bootstrap CSS -->
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -17,7 +17,7 @@
             <link href="{{asset('backend/css/estilo-responsive.css') }}" rel="stylesheet">
 
         {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('icon.png') }}" />
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -38,7 +38,7 @@
                     <a class="navbar-brand" href="#"><img src="{{ asset('public/image/logo_white.png') }}" class="img-logo"/></a>
                     <!-- usuari -->
                     <div class="nav notify-row" id="top_menu">  
-                        <a class="btn btn-sm btn-warning ml" href="{{asset('/agencia')}}"><span class="fa fa-eye"></span>   ver pàgina</a>
+                        <a class="btn btn-sm btn-warning ml" href="{{asset('/agencia')}}" target="_blank"><span class="fa fa-eye"></span>   ver pàgina</a>
                     </div>
                     <!-- Boto logout -->
                     <div class="top-menu">
