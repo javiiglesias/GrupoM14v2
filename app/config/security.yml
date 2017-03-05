@@ -8,7 +8,7 @@ security:
             pattern: ^/backend
             anonymous: ~
             provider: in_memory
-#            provider: agencia_provider
+#           provider: agencia_provider
             form_login: 
                 #redirige al formulario de login
                 login_path: backend_login 
@@ -35,10 +35,10 @@ security:
                     admin:
                         password: 123
                         roles: 'ROLE_ADMIN'
-        agencia_provider:
-            entity: 
-                class: FrontendBundle:Usuario
-                property: nombre 
+#        agencia_provider:
+#            entity: 
+#                class: FrontendBundle:Usuario
+#                property: nombre 
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
 #        FrontendBundle\Entity\Usuario: sha512

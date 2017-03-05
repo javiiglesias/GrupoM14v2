@@ -11,10 +11,10 @@ use \Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class LoginController extends Controller {
 
     public function loginAction(Request $request) {
-        
+
         $authenticationUtils = $this->get('security.authentication_utils');
 
-        // Obtener el error de inicio de sesión si hay uno
+        // Obtener el error de inicio de sesión
         $error = $authenticationUtils->getLastAuthenticationError();
 
         // obtener el último nombre de usuario introducido por el usuario
@@ -24,6 +24,5 @@ class LoginController extends Controller {
                     'last_username' => $lastUsername,
                     'error' => $error));
     }
-   
 
 }
