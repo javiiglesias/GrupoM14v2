@@ -13,6 +13,7 @@ class ActorsController extends Controller
         $actors= $this->getDoctrine()->getRepository('FrontendBundle:Actor')->findAll();
         $tipusobra = $this->getDoctrine()->getRepository('FrontendBundle:TipoObra')->findAll();
         $obres = $this->getDoctrine()->getRepository('FrontendBundle:obra')->findAll();
+        
         return $this->render('FrontendBundle:Default:mostraractors.html.twig', array(
                     'array' => $actors,
                     'obres' => $obres,
@@ -23,10 +24,11 @@ class ActorsController extends Controller
      public function filtreSexeAction($sexe)
     {
         $actors = $this->getDoctrine()->getRepository('FrontendBundle:Actor')->findBySexe($sexe);
- 
+        $obres = $this->getDoctrine()->getRepository('FrontendBundle:obra')->findAll();
         $tipusobra = $this->getDoctrine()->getRepository('FrontendBundle:TipoObra')->findAll();
         return $this->render('FrontendBundle:Default:mostraractors.html.twig', array(
                     'array' => $actors,
+                    'obres' => $obres,
                     'tipusObra' => $tipusobra,
         ));
     }

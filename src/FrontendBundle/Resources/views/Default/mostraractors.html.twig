@@ -30,7 +30,7 @@
                             {#{{ actors.obra}}</p>#}
                             {% if actors.obra is not empty %}
                                 {% for obra in obres %}                            
-                                    {% if obra.nom == actors.obra.nom%}  
+                                    {% if obra.nom == actors.obra.nom %}  
                                     <p><strong>obra:</strong>   {{obra.nom}}</p>
                                 {% endif %}
                             {% endfor %}
